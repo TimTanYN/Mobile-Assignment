@@ -2,9 +2,11 @@ package com.example.tracking
 
 import android.content.Intent
 import android.graphics.Color
+import android.location.Geocoder
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -15,8 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 
 
 class DiseaseActivity : BaseNavigationActivity(){
-
-
+    var receivedLatLng = LatLng(0.0,0.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +26,10 @@ class DiseaseActivity : BaseNavigationActivity(){
         val intent = intent
         val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
         val longitude = intent.getDoubleExtra("longitude", 0.0) // default value 0.0
-        val receivedLatLng = LatLng(latitude, longitude)
+        receivedLatLng = LatLng(latitude, longitude)
         chart()
         list()
-
-
+        fetchAddress(receivedLatLng)
     }
 
     fun chart(){
@@ -104,12 +104,33 @@ class DiseaseActivity : BaseNavigationActivity(){
         listView.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, DetailActivity::class.java)
 
-            // Optional: if you want to send some data to the new activity
-            // intent.putExtra("key", "value")
-
+            if (receivedLatLng != null) {
+                intent.putExtra("latitude", receivedLatLng.latitude)
+                intent.putExtra("longitude", receivedLatLng.longitude)
+            }
             startActivity(intent)
         }
         }
+
+    private fun fetchAddress(latLng: LatLng) {
+        val geocoder = Geocoder(this)
+        try {
+            val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            if (addresses != null) {
+                if (addresses.isNotEmpty()) {
+                    val address = addresses?.get(0)
+                    // You can get more details from 'address' as per your requirement
+                    if (address != null) {
+                        Toast.makeText(this, address.getAddressLine(0), Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Address not found!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error fetching address. Please try again.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
 }

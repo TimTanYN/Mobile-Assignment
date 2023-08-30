@@ -7,11 +7,15 @@ import com.google.android.gms.maps.model.LatLng
 
 class DetailActivity : BaseNavigationActivity(){
 
+    var receivedLatLng = LatLng(0.0,0.0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail)
         initToolbarAndNavigation()
-
+        val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
+        val longitude = intent.getDoubleExtra("longitude", 0.0) // default value 0.0
+        receivedLatLng = LatLng(latitude, longitude)
+        fetchAddress(receivedLatLng)
     }
 
     private fun fetchAddress(latLng: LatLng) {
