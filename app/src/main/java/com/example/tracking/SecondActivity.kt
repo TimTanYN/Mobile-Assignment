@@ -1,9 +1,8 @@
-package com.example.myapplication
+package com.example.tracking
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 
 
 class SecondActivity : BaseNavigationActivity(){

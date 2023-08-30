@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.tracking
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import com.example.myapplication.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
