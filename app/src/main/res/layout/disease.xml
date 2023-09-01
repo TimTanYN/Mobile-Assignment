@@ -46,18 +46,20 @@
             android:layout_width="375dp"
             android:layout_height="274dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/frame"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/include"
             app:layout_constraintVertical_bias="0.938">
+<!--            android:background="@drawable/frame">-->
 
             <ListView
-                android:id="@+id/listView"
+                android:id="@+id/DiseaselistView"
                 android:layout_width="371dp"
                 android:layout_height="270dp"
                 android:background="?android:attr/selectableItemBackground"
+                android:divider="@null"
+                android:dividerHeight="0dp"
                 android:gravity="center_vertical"
                 android:padding="16dp"
                 android:scrollbarThumbVertical="@drawable/scrollbar_thumb"

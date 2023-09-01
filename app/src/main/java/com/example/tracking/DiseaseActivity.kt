@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import com.example.tracking.adapter.ListViewAdapter
+import com.example.tracking.model.ListViewModel
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -22,6 +25,9 @@ class DiseaseActivity : BaseNavigationActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.disease)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Disease"
         initToolbarAndNavigation()
         val intent = intent
         val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
@@ -30,6 +36,7 @@ class DiseaseActivity : BaseNavigationActivity(){
         chart()
         list()
         fetchAddress(receivedLatLng)
+
     }
 
     fun chart(){
@@ -96,9 +103,16 @@ class DiseaseActivity : BaseNavigationActivity(){
     }
 
     fun list(){
-        val items = arrayOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5","Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
-        val listView: ListView = findViewById(R.id.listView)
+        val items = listOf(
+            ListViewModel.ListItem("Sample text 1", R.drawable.btn_icon),
+            ListViewModel.ListItem("Sample text 2", R.drawable.btn_icon),
+            ListViewModel.ListItem("Sample text 3", R.drawable.btn_icon),
+            ListViewModel.ListItem("Sample text 4", R.drawable.btn_icon),
+            ListViewModel.ListItem("Sample text 5", R.drawable.btn_icon),
+            // ... add more items as needed
+        )
+        val listView: ListView = findViewById(R.id.DiseaselistView)
+        val adapter = ListViewAdapter(this, items)
         listView.adapter = adapter
 
         listView.setOnItemClickListener { parent, view, position, id ->

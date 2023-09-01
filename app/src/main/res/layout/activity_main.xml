@@ -16,17 +16,7 @@
 
         <!-- Button added to the main content area -->
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/app_bar_main"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+
 
         <ImageButton
             android:id="@+id/diesase"
@@ -39,14 +29,27 @@
             app:srcCompat="@drawable/_eae044d8e5394b7bf5ba7132936e0d07b3e1541" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/medicine"
             android:layout_width="336dp"
             android:layout_height="155dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="400dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/wallhaven_9dxv78_1920x1080" />
+            app:srcCompat="@drawable/wallhaven_9dxv78_1920x1080"
+            />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/app_bar_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

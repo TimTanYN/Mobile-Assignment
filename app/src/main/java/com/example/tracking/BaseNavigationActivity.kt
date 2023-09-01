@@ -12,17 +12,18 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
     fun initToolbarAndNavigation() {
         val drawer_layout: DrawerLayout = findViewById(R.id.drawer)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer)
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
-        drawer_layout.addDrawerListener(toggle)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         val nav_view: NavigationView = findViewById(R.id.nav_view)
         nav_view.setNavigationItemSelectedListener(this)
-        toolbar.title = "Main Activity"
+
     }
 
     override fun onBackPressed() {

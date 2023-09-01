@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#03A9F4"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:title="track"
+
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

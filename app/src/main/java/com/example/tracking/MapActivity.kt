@@ -101,6 +101,8 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
             }
         } catch (e: Exception) {
             Toast.makeText(this, "Error fetching address. Please try again.", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Lat: ${latLng.latitude}, Lng: ${latLng.longitude}", Toast.LENGTH_SHORT).show()
+
         }
     }
 
