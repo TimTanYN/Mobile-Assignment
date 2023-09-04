@@ -9,6 +9,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.tracking.R
 import com.example.tracking.model.ListViewMedicine
 import java.util.Locale
@@ -32,11 +33,16 @@ class ListViewMedicine(private val context: Context, private val dataSource: Lis
         val pharmacyName = rowView.findViewById<TextView>(R.id.pharmacyName)
         val logo = rowView.findViewById<ImageView>(R.id.pharmacyLogo)
         val tag = rowView.findViewById<TextView>(R.id.pharmacyTag)
-
         val itemData = getItem(position) as ListViewMedicine.ListItem
+        if (itemData.imageResId is String) {
+            Glide.with(context)
+                .load(itemData.imageResId as String) // Assuming this contains the URL of the image
+                .into(logo)
+        } else {
+            logo.setImageResource(itemData.imageResId as Int) // Directly set the drawable resource
+        }
 
         tag.text = itemData.textViewText
-        logo.setImageResource(itemData.imageResId)
         pharmacyName.text = itemData.pharmacyName
 
         return rowView
