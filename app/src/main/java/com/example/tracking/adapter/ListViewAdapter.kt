@@ -23,15 +23,13 @@ class ListViewAdapter (private val context: Context, private val dataSource: Lis
 
     @SuppressLint("MissingInflatedId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val rowView = convertView ?: inflater.inflate(R.layout.pharmacy, parent, false)
+        val rowView = convertView ?: inflater.inflate(R.layout.disease_list, parent, false)
 
         val pharmcyName = rowView.findViewById<TextView>(R.id.pharmacyName)
-        val pharmacyTag = rowView.findViewById<TextView>(R.id.pharmacyTag)
         val pharmacyLogo = rowView.findViewById<ImageView>(R.id.pharmacyLogo)
         val listItem = getItem(position) as ListViewModel.ListItem
 
         pharmcyName.text = listItem.text
-        pharmacyTag.text = listItem.text
         pharmacyLogo.setImageResource(listItem.imageResId)
 
         return rowView

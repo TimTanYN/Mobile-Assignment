@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import com.example.tracking.model.ListViewMedicine
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,11 +21,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MapActivity : FragmentActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private var currentMarker: Marker? = null
+    var userData = 0
+    val db = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +88,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
         currentMarker = mMap.addMarker(MarkerOptions().position(latLng).title("Chosen Location"))
 
 //         Optionally: retrieve address from latLng (Requires additional setup with Geocoder)
-         fetchAddress(latLng)
+        fetchAddress(latLng)
     }
 
     private fun fetchAddress(latLng: LatLng) {
@@ -90,17 +97,36 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
             val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
             if (addresses != null) {
                 if (addresses.isNotEmpty()) {
-                    val address = addresses?.get(0)
-                    // You can get more details from 'address' as per your requirement
-                    if (address != null) {
-                        Toast.makeText(this, address.getAddressLine(0), Toast.LENGTH_SHORT).show()
-                    }
+                    val city = addresses[0].locality ?: return
+                    Toast.makeText(this, "Selected city: $city", Toast.LENGTH_SHORT).show()
+
+                    db.collection("disease").document("covid")
+
+                        .get()
+                        .addOnSuccessListener { document ->
+                            Log.i("MyTag", "This is an info log message.")
+                            if (document != null) {
+
+                                val amount = document.getLong(city)?.toInt()
+                                if (amount != null) {
+                                    Toast.makeText(this, "Cases in $city: $amount", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, "No data for $city", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Log.d("Firestore", "No such document")
+                            }
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.d("Firestore", "get failed with ", exception)
+                        }
                 } else {
                     Toast.makeText(this, "Address not found!", Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error fetching address. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error fetching address. Please try again.", Toast.LENGTH_SHORT)
+                .show()
 //            Toast.makeText(this, "Lat: ${latLng.latitude}, Lng: ${latLng.longitude}", Toast.LENGTH_SHORT).show()
 
         }
@@ -119,12 +145,19 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
                 Toast.makeText(this, "Location not found!", Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error searching location. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error searching location. Please try again.", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
     fun hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    fun compare() {
+
+
     }
 }

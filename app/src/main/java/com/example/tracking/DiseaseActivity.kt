@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -17,10 +18,13 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class DiseaseActivity : BaseNavigationActivity(){
     var receivedLatLng = LatLng(0.0,0.0)
+    private lateinit var db :DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,17 +107,37 @@ class DiseaseActivity : BaseNavigationActivity(){
     }
 
     fun list(){
-        val items = listOf(
-            ListViewModel.ListItem("Sample text 1", R.drawable.btn_icon),
-            ListViewModel.ListItem("Sample text 2", R.drawable.btn_icon),
-            ListViewModel.ListItem("Sample text 3", R.drawable.btn_icon),
-            ListViewModel.ListItem("Sample text 4", R.drawable.btn_icon),
-            ListViewModel.ListItem("Sample text 5", R.drawable.btn_icon),
-            // ... add more items as needed
-        )
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("your_collection_name").document("your_document_id")
         val listView: ListView = findViewById(R.id.DiseaselistView)
-        val adapter = ListViewAdapter(this, items)
-        listView.adapter = adapter
+
+        db.collection("disease").document("Kuala Lumpur")
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot != null && documentSnapshot.exists()) {
+                    // Extracting field names from the document
+                    val fieldNames = documentSnapshot.data?.keys?.map {
+                        ListViewModel.ListItem(it, R.drawable.btn_icon)
+                    } ?: listOf()
+
+                    // Set the fetched data to your ListView using your custom adapter
+
+                    val adapter = ListViewAdapter(this, fieldNames)
+                    listView.adapter = adapter
+                }
+            }
+
+//        val items = listOf(
+//            ListViewModel.ListItem("Sample text 1", R.drawable.btn_icon),
+//            ListViewModel.ListItem("Sample text 2", R.drawable.btn_icon),
+//            ListViewModel.ListItem("Sample text 3", R.drawable.btn_icon),
+//            ListViewModel.ListItem("Sample text 4", R.drawable.btn_icon),
+//            ListViewModel.ListItem("Sample text 5", R.drawable.btn_icon),
+//            // ... add more items as needed
+//        )
+//
+//        val adapter = ListViewAdapter(this, items)
+//        listView.adapter = adapter
 
         listView.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, DetailActivity::class.java)

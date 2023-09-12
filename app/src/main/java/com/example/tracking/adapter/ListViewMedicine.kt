@@ -12,14 +12,21 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.tracking.R
 import com.example.tracking.model.ListViewMedicine
+import com.example.tracking.model.ListViewModel
 import java.util.Locale
 
 
-class ListViewMedicine(private val context: Context, private val dataSource: List<ListViewMedicine.ListItem>): BaseAdapter(),
+class ListViewMedicine(val context: Context, items: List<ListViewMedicine.ListItem>): BaseAdapter(),
     Filterable {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    private val originalData: List<ListViewMedicine.ListItem> = dataSource
-    private var filteredData: List<ListViewMedicine.ListItem> = ArrayList(dataSource)
+    var originalData: List<ListViewMedicine.ListItem>
+    var filteredData: List<ListViewMedicine.ListItem>
+
+    init {
+
+        this.originalData = items
+        this.filteredData = items
+    }
 
     override fun getCount(): Int = filteredData.size
 
@@ -42,13 +49,13 @@ class ListViewMedicine(private val context: Context, private val dataSource: Lis
             logo.setImageResource(itemData.imageResId as Int) // Directly set the drawable resource
         }
 
-        tag.text = itemData.textViewText
+        tag.text = itemData.pharmacyDesc
         pharmacyName.text = itemData.pharmacyName
 
         return rowView
     }
 
-    override fun getFilter(): Filter {
+     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filterResults = FilterResults()
@@ -56,10 +63,10 @@ class ListViewMedicine(private val context: Context, private val dataSource: Lis
                     filterResults.values = originalData
                     filterResults.count = originalData.size
                 } else {
-                    val searchText = constraint.toString().toLowerCase()
+                    val searchText = constraint.toString().toLowerCase(Locale.getDefault()) // Added Locale
                     val filteredItems = originalData.filter {
-                        it.pharmacyName.toLowerCase().contains(searchText) ||
-                                it.textViewText.toLowerCase().contains(searchText)
+                        it.pharmacyName.toLowerCase(Locale.getDefault()).contains(searchText) ||
+                                it.pharmacyDesc.toLowerCase(Locale.getDefault()).contains(searchText)
                     }
                     filterResults.values = filteredItems
                     filterResults.count = filteredItems.size

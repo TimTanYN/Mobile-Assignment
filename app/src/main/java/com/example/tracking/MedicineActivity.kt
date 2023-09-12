@@ -39,8 +39,7 @@ class MedicineActivity : BaseNavigationActivity(){
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                adapter.filter.filter(s)
-
+                adapter.filter.filter(s.toString())
             }
         })
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -68,10 +67,9 @@ class MedicineActivity : BaseNavigationActivity(){
             val items = querySnapshot.documents.map { document ->
                 val pharmacyName = document.getString("pharmacyName") ?: ""
                 val pharmacyDesc = document.getString("pharmacyDesc") ?: ""
-                val imageUrl = document.getString("URL") ?: R.drawable.big
-                ListViewMedicine.ListItem(imageUrl, pharmacyName,pharmacyDesc)
+                val imageUrl = document.getString("URL") ?: ""
+                ListViewMedicine.ListItem(imageUrl, pharmacyName, pharmacyDesc)
             }
-
             val adapter = com.example.tracking.adapter.ListViewMedicine(this, items)
             val listView: ListView = findViewById(R.id.list_view)
             listView.adapter = adapter
