@@ -38,7 +38,7 @@ android:layout_height="wrap_content"
 android:padding="16dp">
 
     <TextView
-        android:id="@+id/pharmacyName"
+        android:id="@+id/disease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -50,7 +50,7 @@ android:padding="16dp">
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/pharmacyLogo"
+        android:id="@+id/detail"
         android:layout_width="47dp"
         android:layout_height="32dp"
         android:layout_marginTop="19dp"

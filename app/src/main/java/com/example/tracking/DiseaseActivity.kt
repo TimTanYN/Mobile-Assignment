@@ -1,5 +1,6 @@
 package com.example.tracking
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import android.location.Geocoder
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import com.example.tracking.adapter.ListViewAdapter
 import com.example.tracking.model.ListViewModel
 import com.github.mikephil.charting.charts.LineChart
@@ -17,13 +19,24 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TreeMap
 
 
 class DiseaseActivity : BaseNavigationActivity(){
     var receivedLatLng = LatLng(0.0,0.0)
+    var city = ""
     private lateinit var db :DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +49,7 @@ class DiseaseActivity : BaseNavigationActivity(){
         val intent = intent
         val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
         val longitude = intent.getDoubleExtra("longitude", 0.0) // default value 0.0
+        city = intent.getStringExtra("city").toString()
         receivedLatLng = LatLng(latitude, longitude)
         chart()
         list()
@@ -43,75 +57,97 @@ class DiseaseActivity : BaseNavigationActivity(){
 
     }
 
-    fun chart(){
+    fun chart() {
         val lineChart: LineChart = findViewById(R.id.lineChart)
         val customColor = Color.parseColor("#007AFE")
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("disease")
+        val dataForChart = TreeMap<String, Long>()
+        val validDates = getLastSixDates()
 
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (dateSnapshot in dataSnapshot.children) {
+                    val date = dateSnapshot.key ?: continue
+                    val amountData = dateSnapshot.child("amount").value as? Long ?: continue
 
-        // Example data
-        val entries = ArrayList<Entry>()
-        entries.add(Entry(0f, 1f))
-        entries.add(Entry(1f, 2f))
-        entries.add(Entry(2f, 3f))
-        entries.add(Entry(3f, 5f))
-        entries.add(Entry(4f, 3f))
-        entries.add(Entry(5f, 7f))
+                    // Store date and amount in the TreeMap
+                    dataForChart[date] = amountData
+                }
 
-        // Create dataset
-        val dataSet = LineDataSet(entries, "Sample Data")
-        dataSet.color = customColor
-        dataSet.valueTextColor = Color.RED
-        dataSet.lineWidth = 2.5f
-        dataSet.setCircleColor(Color.RED)
-        dataSet.circleRadius = 5f
-        dataSet.setDrawCircleHole(false)
-        dataSet.valueTextSize = 12f
+                // Now, dataForChart contains the data in ascending order of dates.
+                // Populate the chart here
+                val entries = ArrayList<Entry>()
+                for ((index, entry) in dataForChart.entries.withIndex()) {
+                    entries.add(Entry(index.toFloat(), entry.value.toFloat()))
+                }
 
-// Design
-        lineChart.description.isEnabled = false
-        lineChart.setDrawGridBackground(false)
-        lineChart.setTouchEnabled(true)
-        lineChart.isDragEnabled = true
-        lineChart.setScaleEnabled(true)
-        lineChart.setPinchZoom(true)
+                val dataSet = LineDataSet(entries, "Amount over Time")
+                dataSet.color = customColor
+                dataSet.valueTextColor = Color.RED
+                dataSet.lineWidth = 2.5f
+                dataSet.setCircleColor(Color.RED)
+                dataSet.circleRadius = 5f
+                dataSet.setDrawCircleHole(false)
+                dataSet.valueTextSize = 12f
+
+                // Design
+                lineChart.description.isEnabled = false
+                lineChart.setDrawGridBackground(false)
+                lineChart.setTouchEnabled(true)
+                lineChart.isDragEnabled = true
+                lineChart.setScaleEnabled(true)
+                lineChart.setPinchZoom(true)
 
 
 // Remove right y-axis
-        lineChart.axisRight.isEnabled = false
-        lineChart.xAxis.isEnabled = false
-        lineChart.axisLeft.isEnabled = false
+                lineChart.axisRight.isEnabled = false
+                lineChart.xAxis.isEnabled = false
+                lineChart.axisLeft.isEnabled = false
 
 // X-Axis design
-        val xAxis = lineChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.textSize = 12f
-        xAxis.textColor = Color.BLACK
-        xAxis.setDrawAxisLine(true)
-        xAxis.setDrawGridLines(false)
-        xAxis.labelCount = 4
-        xAxis.granularity = 1f
-        lineChart.xAxis.setDrawGridLines(false)
-        lineChart.axisLeft.setDrawGridLines(false)
-        xAxis.position = XAxis.XAxisPosition.TOP
-        xAxis.isEnabled = true
+                val xAxis = lineChart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.textSize = 12f
+                xAxis.textColor = Color.BLACK
+                xAxis.setDrawAxisLine(true)
+                xAxis.setDrawGridLines(false)
+//                xAxis.labelCount = 4
+                xAxis.valueFormatter = DateValueFormatter(validDates)
+                xAxis.granularity = 1f
+                lineChart.xAxis.setDrawGridLines(false)
+                lineChart.axisLeft.setDrawGridLines(false)
+                xAxis.position = XAxis.XAxisPosition.TOP
+                xAxis.isEnabled = true
 
 // Legend design
-        val legend = lineChart.legend
-        legend.form = Legend.LegendForm.LINE
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                val legend = lineChart.legend
+                legend.form = Legend.LegendForm.LINE
+                legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
 
-// Apply data
-        val lineData = LineData(dataSet)
-        lineChart.data = lineData
-        lineChart.invalidate()
+                val lineData = LineData(dataSet)
+                lineChart.data = lineData
+                lineChart.invalidate()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle errors here
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
     }
 
     fun list(){
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("your_collection_name").document("your_document_id")
+        val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+        val docRef = db.collection("disease")
+            .document(city)
+            .collection(currentDate)
+            .document("disease")
         val listView: ListView = findViewById(R.id.DiseaselistView)
 
-        db.collection("disease").document("Kuala Lumpur")
+
+        docRef
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot != null && documentSnapshot.exists()) {
@@ -140,12 +176,11 @@ class DiseaseActivity : BaseNavigationActivity(){
 //        listView.adapter = adapter
 
         listView.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(this, DetailActivity::class.java)
 
-            if (receivedLatLng != null) {
-                intent.putExtra("latitude", receivedLatLng.latitude)
-                intent.putExtra("longitude", receivedLatLng.longitude)
-            }
+            val selectedItem = listView.adapter.getItem(position) as ListViewModel.ListItem
+            Toast.makeText(this, "Selected: ${selectedItem.text}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("selected",selectedItem.text)
             startActivity(intent)
         }
         }
@@ -170,5 +205,24 @@ class DiseaseActivity : BaseNavigationActivity(){
         }
     }
 
+    fun getLastSixDates(): List<String> {
+        val dateFormat = SimpleDateFormat("MMdd", Locale.getDefault())
+        val dates = mutableListOf<String>()
 
+        val calendar = Calendar.getInstance()
+        for (i in 0..5) {
+            dates.add(dateFormat.format(calendar.time))
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+        }
+
+        return dates
+    }
+
+
+}
+
+class DateValueFormatter(private val dates: List<String>) : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+        return if (value.toInt() < dates.size) dates[value.toInt()] else ""
+    }
 }

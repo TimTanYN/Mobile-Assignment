@@ -18,12 +18,12 @@ tools:openDrawer="start">
 
     <include
         android:id="@+id/include"
-        layout="@layout/app_bar_main"
+        layout="@layout/bottom_navigation_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -58,6 +58,7 @@ tools:openDrawer="start">
         android:dividerHeight="0dp"/>
 
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!-- Your NavigationView -->
@@ -69,5 +70,6 @@ tools:openDrawer="start">
     android:visibility="visible"
     app:menu="@menu/activity_main_drawer"
     tools:visibility="gone" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

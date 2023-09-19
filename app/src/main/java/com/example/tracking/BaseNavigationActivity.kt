@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -61,4 +63,44 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    fun Create() {
+        // BottomNavigationView setup
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    navigateToActivity(MapActivity::class.java)
+                    true
+                }
+                R.id.Search -> {
+                    navigateToActivity(Cart::class.java)
+                    true
+                }
+                R.id.person -> {
+                    navigateToActivity(Cart::class.java)
+                    true
+                }
+                R.id.cart -> {
+                    navigateToActivity(Cart::class.java)
+                    true
+                }
+                // ... add more cases for other menu items
+                else -> false
+            }
+        }
+
+        // FloatingActionButton setup
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            navigateToActivity(Cart::class.java)
+        }
+    }
+
+    protected fun navigateToActivity(activityClass: Class<*>) {
+        if (this::class.java != activityClass) {
+            val intent = Intent(this, activityClass)
+            startActivity(intent)
+        }}
 }
+

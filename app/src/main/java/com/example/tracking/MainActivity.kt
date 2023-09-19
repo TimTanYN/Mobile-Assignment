@@ -17,8 +17,7 @@ class MainActivity :BaseNavigationActivity() {
         initToolbarAndNavigation()
         diseaseNavigate()
         medicineNavigate()
-
-
+        Create()
     }
 
 
@@ -40,5 +39,3 @@ class MainActivity :BaseNavigationActivity() {
 
 
 }
-
-

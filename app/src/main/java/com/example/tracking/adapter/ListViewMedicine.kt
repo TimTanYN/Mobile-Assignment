@@ -12,7 +12,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.tracking.R
 import com.example.tracking.model.ListViewMedicine
-import com.example.tracking.model.ListViewModel
 import java.util.Locale
 
 

@@ -29,6 +29,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
     private var currentMarker: Marker? = null
     var userData = 0
     val db = FirebaseFirestore.getInstance()
+    var city = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +60,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
             if (latLng != null) {
                 intent.putExtra("latitude", latLng.latitude)
                 intent.putExtra("longitude", latLng.longitude)
+                intent.putExtra("city", city)
             }
 
             startActivity(intent)
@@ -97,7 +99,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
             val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
             if (addresses != null) {
                 if (addresses.isNotEmpty()) {
-                    val city = addresses[0].locality ?: return
+                    city = addresses[0].locality ?: return
                     Toast.makeText(this, "Selected city: $city", Toast.LENGTH_SHORT).show()
 
                     db.collection("disease").document("covid")

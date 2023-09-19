@@ -25,12 +25,12 @@ class ListViewAdapter (private val context: Context, private val dataSource: Lis
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = convertView ?: inflater.inflate(R.layout.disease_list, parent, false)
 
-        val pharmcyName = rowView.findViewById<TextView>(R.id.pharmacyName)
-        val pharmacyLogo = rowView.findViewById<ImageView>(R.id.pharmacyLogo)
+        val disease = rowView.findViewById<TextView>(R.id.disease)
+        val image = rowView.findViewById<ImageView>(R.id.detail)
         val listItem = getItem(position) as ListViewModel.ListItem
 
-        pharmcyName.text = listItem.text
-        pharmacyLogo.setImageResource(listItem.imageResId)
+        disease.text = listItem.text
+        image.setImageResource(listItem.imageResId)
 
         return rowView
     }

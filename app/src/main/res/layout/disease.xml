@@ -28,19 +28,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
             android:layout_width="374dp"
             android:layout_height="326dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="90dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="@+id/include"
             app:layout_constraintTop_toTopOf="@+id/include"
             app:layout_constraintVertical_bias="0.0" />
-
 
         <FrameLayout
             android:layout_width="375dp"

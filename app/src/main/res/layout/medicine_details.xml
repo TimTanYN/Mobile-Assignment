@@ -16,29 +16,6 @@
 
         <!-- Button added to the main content area -->
 
-
-
-        <ImageButton
-            android:id="@+id/diesase"
-            android:layout_width="336dp"
-            android:layout_height="155dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="200dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_eae044d8e5394b7bf5ba7132936e0d07b3e1541" />
-
-        <ImageButton
-            android:id="@+id/medicine"
-            android:layout_width="336dp"
-            android:layout_height="155dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="400dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/wallhaven_9dxv78_1920x1080"
-            />
-
         <include
             android:id="@+id/include"
             layout="@layout/bottom_navigation_view"
@@ -51,6 +28,38 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+
+        <EditText
+            android:id="@+id/search_medicine"
+            android:layout_width="377dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/rounded_search"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="12dp"
+            android:hint="Search here"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/medicine"
+            android:layout_width="342dp"
+            android:layout_height="472dp"
+            android:layout_marginTop="176dp"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="20dp" >
+
+
+        </ListView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Your NavigationView -->
@@ -62,5 +71,7 @@
         android:visibility="visible"
         app:menu="@menu/activity_main_drawer"
         tools:visibility="gone" />
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
