@@ -64,11 +64,14 @@ class DiseaseActivity : BaseNavigationActivity(){
         val myRef = database.getReference("disease")
         val dataForChart = TreeMap<String, Long>()
         val validDates = getLastSixDates()
+        val validDate = getLastSixDate()
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (dateSnapshot in dataSnapshot.children) {
                     val date = dateSnapshot.key ?: continue
+                    if (date !in validDates) continue // Skip dates that are not in the last six days
+
                     val amountData = dateSnapshot.child("amount").value as? Long ?: continue
 
                     // Store date and amount in the TreeMap
@@ -113,7 +116,7 @@ class DiseaseActivity : BaseNavigationActivity(){
                 xAxis.setDrawAxisLine(true)
                 xAxis.setDrawGridLines(false)
 //                xAxis.labelCount = 4
-                xAxis.valueFormatter = DateValueFormatter(validDates)
+                xAxis.valueFormatter = DateValueFormatter(validDate)
                 xAxis.granularity = 1f
                 lineChart.xAxis.setDrawGridLines(false)
                 lineChart.axisLeft.setDrawGridLines(false)
@@ -206,6 +209,19 @@ class DiseaseActivity : BaseNavigationActivity(){
     }
 
     fun getLastSixDates(): List<String> {
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+        val dates = mutableListOf<String>()
+
+        val calendar = Calendar.getInstance()
+        for (i in 0..5) {
+            dates.add(dateFormat.format(calendar.time))
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+        }
+
+        return dates
+    }
+
+    fun getLastSixDate(): List<String> {
         val dateFormat = SimpleDateFormat("MMdd", Locale.getDefault())
         val dates = mutableListOf<String>()
 
