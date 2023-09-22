@@ -2,6 +2,7 @@ package com.example.tracking
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.database.DatabaseReference
@@ -20,7 +21,8 @@ class SecondActivity : BaseNavigationActivity(){
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Tracking"
-        initToolbarAndNavigation()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        initToolbarAndNavigation()
 
 //        db = FirebaseFirestore.getInstance()
 //        val user = hashMapOf(
@@ -68,5 +70,15 @@ class SecondActivity : BaseNavigationActivity(){
             startActivity(intent)
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()  // Call this method to finish the current activity and return to the previous one
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -24,13 +24,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity"></activity>
+        <activity
+            android:name=".SecondActivity"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".DiseaseActivity"></activity>
         <activity android:name=".DetailActivity"></activity>
         <activity android:name=".MedicineActivity"></activity>
         <activity android:name=".MedicineDetails"></activity>
         <activity android:name=".Cart"></activity>
+        <activity
+            android:name=".CreateDisease"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAKrD9Kp41hhUHoWQiNqU8ns1k2lJhygpU" />

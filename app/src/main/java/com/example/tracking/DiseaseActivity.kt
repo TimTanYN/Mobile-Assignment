@@ -166,17 +166,7 @@ class DiseaseActivity : BaseNavigationActivity(){
                 }
             }
 
-//        val items = listOf(
-//            ListViewModel.ListItem("Sample text 1", R.drawable.btn_icon),
-//            ListViewModel.ListItem("Sample text 2", R.drawable.btn_icon),
-//            ListViewModel.ListItem("Sample text 3", R.drawable.btn_icon),
-//            ListViewModel.ListItem("Sample text 4", R.drawable.btn_icon),
-//            ListViewModel.ListItem("Sample text 5", R.drawable.btn_icon),
-//            // ... add more items as needed
-//        )
-//
-//        val adapter = ListViewAdapter(this, items)
-//        listView.adapter = adapter
+
 
         listView.setOnItemClickListener { parent, view, position, id ->
 
@@ -226,12 +216,13 @@ class DiseaseActivity : BaseNavigationActivity(){
         val dates = mutableListOf<String>()
 
         val calendar = Calendar.getInstance()
+
         for (i in 0..5) {
             dates.add(dateFormat.format(calendar.time))
             calendar.add(Calendar.DAY_OF_MONTH, -1)
         }
-
-        return dates
+        println("Generated Dates: $dates")
+        return dates.reversed()
     }
 
 
