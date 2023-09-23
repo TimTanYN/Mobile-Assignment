@@ -6,15 +6,15 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
-import com.example.tracking.adapter.ViewPager2Adapter
+import com.example.tracking.adapter.PharmacyTabsAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class DiseaseTabs:AppCompatActivity() {
+class PharmacyTabs:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.disease_crud)
+        setContentView(R.layout.pharmacy_crud)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -23,7 +23,7 @@ class DiseaseTabs:AppCompatActivity() {
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
 
-        viewPager.adapter = ViewPager2Adapter(this)
+        viewPager.adapter = PharmacyTabsAdapter(this)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
@@ -48,17 +48,13 @@ class DiseaseTabs:AppCompatActivity() {
                 // Handle settings action
                 true
             }
+
             R.id.create -> {
                 // Handle about action
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
-
-
-
-
 }

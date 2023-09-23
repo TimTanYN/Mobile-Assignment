@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -37,9 +38,25 @@
         <activity android:name=".DetailActivity"></activity>
         <activity android:name=".MedicineActivity"></activity>
         <activity android:name=".MedicineDetails"></activity>
-        <activity android:name=".Cart"></activity>
+        <activity
+            android:name=".Cart"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".DiseaseTabs"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".PharmacyTabs"
             android:parentActivityName=".MainActivity">
             <!-- meta-data for support library compatibility -->
             <meta-data

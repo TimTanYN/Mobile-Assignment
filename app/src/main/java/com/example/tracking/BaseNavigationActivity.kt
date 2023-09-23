@@ -51,7 +51,8 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
                 startActivity(intent)
             }
             R.id.nav_slideshow -> {
-                // Handle the slideshow action
+                val intent = Intent(this, PharmacyTabs::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
                 // Handle the share action

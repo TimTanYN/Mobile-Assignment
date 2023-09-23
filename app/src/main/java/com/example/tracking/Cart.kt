@@ -15,10 +15,10 @@ class Cart: BaseNavigationActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cart)
-//        val toolbar: Toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.title = "Medicine"
-//        initToolbarAndNavigation()
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Tracking"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         cart()
        onResume()
         val recyclerView = findViewById<RecyclerView>(R.id.cartRecyclerView)
@@ -35,7 +35,7 @@ class Cart: BaseNavigationActivity() {
             }
         }
 
-        Create()
+
 
     }
 
