@@ -39,7 +39,7 @@
         <activity android:name=".MedicineDetails"></activity>
         <activity android:name=".Cart"></activity>
         <activity
-            android:name=".CreateDisease"
+            android:name=".DiseaseTabs"
             android:parentActivityName=".MainActivity">
             <!-- meta-data for support library compatibility -->
             <meta-data

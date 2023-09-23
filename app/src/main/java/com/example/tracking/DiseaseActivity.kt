@@ -174,6 +174,7 @@ class DiseaseActivity : BaseNavigationActivity(){
             Toast.makeText(this, "Selected: ${selectedItem.text}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("selected",selectedItem.text)
+            intent.putExtra("city", city)
             startActivity(intent)
         }
         }
@@ -217,7 +218,7 @@ class DiseaseActivity : BaseNavigationActivity(){
 
         val calendar = Calendar.getInstance()
 
-        for (i in 0..5) {
+        for (i in 1..5) {
             dates.add(dateFormat.format(calendar.time))
             calendar.add(Calendar.DAY_OF_MONTH, -1)
         }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UpdateFragment">
+    tools:context=".DeleteFragment">
+
 
     <Spinner
         android:id="@+id/spinner"
@@ -16,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,35 +33,12 @@
             android:hint="Date(yyyy/MM/DD)"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/Covid19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_bottom"
-            android:hint="Covid-19"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/Ecoli"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_bottom"
-            android:hint="E-Coli"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/flu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_bottom"
-            android:hint="Flu"
-            android:inputType="text" />
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update" />
+            android:text="Delete" />
 
     </LinearLayout>
 </FrameLayout>

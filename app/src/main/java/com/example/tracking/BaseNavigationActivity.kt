@@ -47,7 +47,7 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
                 // Handle the home action
             }
             R.id.nav_gallery -> {
-                val intent = Intent(this, CreateDisease::class.java)
+                val intent = Intent(this, DiseaseTabs::class.java)
                 startActivity(intent)
             }
             R.id.nav_slideshow -> {

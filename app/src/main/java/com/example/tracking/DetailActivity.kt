@@ -13,9 +13,14 @@ import com.example.tracking.adapter.RecyclerViewAdapter
 import com.example.tracking.model.RecyclerViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DetailActivity : BaseNavigationActivity(){
 
+    var city = ""
+    var selected = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +29,18 @@ class DetailActivity : BaseNavigationActivity(){
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Details"
         initToolbarAndNavigation()
-        val selected = intent.getStringExtra("selected")
+        selected = intent.getStringExtra("selected").toString()
         fetchDataFromFirestore()
         val text = findViewById<TextView>(R.id.diseases)
         text.text = selected
+        city = intent.getStringExtra("city").toString()
+        getAmount()
 
     }
 
     fun fetchDataFromFirestore() {
         val db = FirebaseFirestore.getInstance()
-        val yourCollectionReference = db.collection("/covid")
-
+        val yourCollectionReference = db.collection(selected)
         yourCollectionReference.get()
             .addOnSuccessListener { documents ->
                 val items = documents.mapNotNull { document ->
@@ -61,6 +67,31 @@ class DetailActivity : BaseNavigationActivity(){
         myRecyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerViewAdapter(items)
         myRecyclerView.adapter = adapter
+    }
+
+    fun getAmount(){
+        val db = FirebaseFirestore.getInstance()
+        val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+
+        db.collection("disease")
+            .document(city)
+            .collection(currentDate)
+            .document("disease")
+           .get()
+           .addOnSuccessListener { document ->
+                if (document != null) {
+
+                   val disease = document.getLong(selected)?.toInt()
+
+
+                   findViewById<TextView>(R.id.amount).text = "Today Cases = " + disease.toString()
+                } else {
+                   Log.d("Firestore", "No such document")
+                }
+           }
+            .addOnFailureListener { exception ->
+               Log.d("Firestore", "get failed with ", exception)
+           }
     }
 
 }
