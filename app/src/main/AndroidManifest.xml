@@ -63,6 +63,67 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+<!--     yee yao-->
+        <activity
+            android:name=".FoodPyramidTab"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".FoodSelectionTab"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".DietPlanTab"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+<!--        hao yi-->
+        <activity android:name=".RiskSurvey"></activity>
+
+<!--        mei li-->
+
+        <activity android:name=".DoctorListActivity">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".DoctorDetailsActivity">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".AppointmentDateAndTime">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".PackageActivity">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".PatientDetailsActivity">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".PaymentActivity">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".AppointmentReviewSummary">
+            <!-- 可选的配置 -->
+        </activity>
+        <activity android:name=".MyAppointmentActivity">
+        </activity>
+        <activity android:name=".AppointmentDetails">
+        </activity>
+        <activity android:name=".RescheduleAppointmentDateTime">
+        </activity>
+        <activity android:name=".Appointment_Main">
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAKrD9Kp41hhUHoWQiNqU8ns1k2lJhygpU" />

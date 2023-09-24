@@ -54,11 +54,21 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
                 val intent = Intent(this, PharmacyTabs::class.java)
                 startActivity(intent)
             }
-            R.id.nav_share -> {
-                // Handle the share action
+            R.id.food_pyramid -> {
+                val intent = Intent(this, FoodPyramidTab::class.java)
+                startActivity(intent)
             }
-            R.id.nav_send -> {
-                // Handle the send action
+            R.id.diet -> {
+                val intent = Intent(this, DietPlanTab::class.java)
+                startActivity(intent)
+            }
+            R.id.Survey -> {
+                val intent = Intent(this, RiskSurvey::class.java)
+                startActivity(intent)
+            }
+            R.id.Appointment -> {
+                val intent = Intent(this, Appointment_Main::class.java)
+                startActivity(intent)
             }
         }
 

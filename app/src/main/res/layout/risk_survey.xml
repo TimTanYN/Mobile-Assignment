@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="762dp"
+        app:layout_anchor="@+id/constraintLayout"
+        app:layout_anchorGravity="center">
+
+        <TextView
+            android:id="@+id/ques1"
+            android:layout_width="388dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="1dp"
+            android:text="@string/text13"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ques1btnGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/ques2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/ques1btnGroup"
+            android:layout_width="362dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/ques2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.326"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques1">
+
+            <RadioButton
+                android:id="@+id/ques1btnYes"
+                android:layout_width="120dp"
+                android:layout_height="24dp"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/ques1btnNo"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/ques2"
+            android:layout_width="360dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/text8"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ques2btnGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques1btnGroup" />
+
+        <RadioGroup
+            android:id="@+id/ques3btnGroup"
+            android:layout_width="393dp"
+            android:layout_height="102dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/ques4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques3">
+
+            <RadioButton
+                android:id="@+id/ques3btnAnnu"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:text="Annually" />
+
+            <RadioButton
+                android:id="@+id/ques3btnBian"
+                android:layout_width="273dp"
+                android:layout_height="28dp"
+                android:text="Biannually" />
+
+            <RadioButton
+                android:id="@+id/ques3btnRare"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Rarely" />
+
+            <RadioButton
+                android:id="@+id/ques3btnNever"
+                android:layout_width="272dp"
+                android:layout_height="24dp"
+                android:text="Never" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnCont"
+            android:layout_width="137dp"
+            android:layout_height="51dp"
+
+            android:layout_marginBottom="9dp"
+            android:text="Continue"
+            android:textColorLink="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.897"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques4"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <TextView
+            android:id="@+id/ques4"
+            android:layout_width="387dp"
+            android:layout_height="102dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/text14"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques3btnGroup"
+            app:layout_constraintVertical_bias="0.192" />
+
+        <RadioGroup
+            android:id="@+id/ques4btnGroup"
+            android:layout_width="223dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCont"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques4">
+
+            <RadioButton
+                android:id="@+id/ques4btnYes"
+                android:layout_width="134dp"
+                android:layout_height="28dp"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/ques4btnNo"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/ques3"
+            android:layout_width="378dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/test9"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ques3btnGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ques2btnGroup" />
+
+        <RadioGroup
+            android:id="@+id/ques2btnGroup"
+            android:layout_width="376dp"
+            android:layout_height="103dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.406">
+
+            <RadioButton
+                android:id="@+id/ques2btnOften"
+                android:layout_width="256dp"
+                android:layout_height="25dp"
+                android:text="Often" />
+
+            <RadioButton
+                android:id="@+id/ques2btnSome"
+                android:layout_width="255dp"
+                android:layout_height="25dp"
+                android:text="Sometimes" />
+
+            <RadioButton
+                android:id="@+id/ques2btnRare"
+                android:layout_width="258dp"
+                android:layout_height="27dp"
+                android:text="Rarely" />
+
+            <RadioButton
+                android:id="@+id/ques2btnNever"
+                android:layout_width="263dp"
+                android:layout_height="28dp"
+                android:text="Never" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

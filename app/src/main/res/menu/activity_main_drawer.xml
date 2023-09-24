@@ -16,16 +16,36 @@
             android:title="Slideshow" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title=" Yee Yao">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/food_pyramid"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Food Pyramid" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/diet"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Diet" />
+        </menu>
+    </item>
+
+    <item android:title="Hao Yi">
+        <menu>
+            <item
+                android:id="@+id/Survey"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Survey" />
+
+        </menu>
+    </item>
+
+    <item android:title="Mei Li">
+        <menu>
+
+            <item
+                android:id="@+id/Appointment"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Dontknow" />
         </menu>
     </item>
 

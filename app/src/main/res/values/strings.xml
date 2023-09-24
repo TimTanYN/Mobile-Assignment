@@ -4,4 +4,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text1">Are you a low risk person who has experienced these symptoms : \n\n</string>
+    <string name="text2">Frequent thirst\nBlurred vision</string>
+    <string name="text3">If your answer is “Yes” to any of the above , kindly update your health status</string>
+    <string name="text4">* This questionnaire is just a preliminary step and not a definitive tool</string>
+    <string name="text5">1. Have you experienced any of the following symptoms? (Select all that apply)</string>
+    <string name="text6">Frequent thirst\nFrequent urination\nUnexplained weight loss\nFatigue or tiredness\nBlurred vision\nSlow-healing cuts or sores\nNumbness or tingling in hands or feet</string>
+    <string name="text7">How often do you engage in physical activity (exercise, sports, etc.)?</string>
+    <string name="text8">2. How often do you engage in physical activity (exercise, sports, etc.)?</string>
+    <string name="test8">How often do you go for regular medical check-ups?</string>
+    <string name="test9">3. How often do you go for regular medical check-ups?</string>
+    <string name="text10">Have you experienced any of the following symptoms? (Select all that apply)\nWheezing\nShortness of breath\t\nCoughing, especially at night or early morning\nChest tightness</string>
+    <string name="text11">Have you experienced any of the following symptoms? (Select all that apply)\nFrequent thirst\nFrequent urination\nFatigue or tiredness\n</string>
+    <string name="text12">\n1. Have you experienced any of the following symptoms? (Select all that apply)\nFrequent thirst\nFrequent urination\nFatigue or tiredness\n</string>
+    <string name="text13">1. Have you experienced any of the following symptoms? (Select all that apply)\nFrequent thirst\nFrequent urination\nFatigue or tiredness</string>
+    <string name="text14">4. Have you experienced any of the following symptoms? (Select all that apply)\nWheezing\nShortness of breath\nCoughing, especially at night or early morning\nChest tightness</string>
 </resources>
