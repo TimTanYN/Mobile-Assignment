@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PharmacyCreateFragment">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -26,6 +31,34 @@
             android:layout_height="wrap_content"
             android:text="Pick Image" />
 
+
+
+        <EditText
+            android:id="@+id/pharmcyID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:hint="ID"
+            android:inputType="text" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom"
+                android:hint="Description"
+                android:inputType="text" />
+
         <Button
             android:id="@+id/uploadImageButton"
             android:layout_width="match_parent"
@@ -34,5 +67,5 @@
             android:text="Upload Image" />
 
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

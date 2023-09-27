@@ -17,13 +17,21 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".HomePage">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePage" />
         </activity>
         <activity
             android:name=".SecondActivity"
@@ -33,13 +41,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".DiseaseActivity"></activity>
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".MedicineActivity"></activity>
-        <activity android:name=".MedicineDetails"></activity>
         <activity
-            android:name=".Cart"
+            android:name=".DiseaseActivity"
+            android:parentActivityName=".MapActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MapActivity" />
+        </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".DiseaseActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DiseaseActivity" />
+        </activity>
+        <activity
+            android:name=".MedicineDetails"
+            android:parentActivityName=".MedicineActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MedicineActivity" />
+        </activity>
+        <activity
+            android:name=".MedicineActivity"
             android:parentActivityName=".MainActivity">
             <!-- meta-data for support library compatibility -->
             <meta-data
@@ -47,7 +74,34 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
+            android:name=".Cart"
+            android:parentActivityName=".HomePage">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePage" />
+        </activity>
+        <activity
             android:name=".DiseaseTabs"
+            android:parentActivityName=".HomePageBack">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePageBack" />
+        </activity>
+
+        <activity
+            android:name=".PharmacyTabs"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".HomePageBack">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePageBack" />
+        </activity>
+
+        <activity
+            android:name=".SignUp"
             android:parentActivityName=".MainActivity">
             <!-- meta-data for support library compatibility -->
             <meta-data
@@ -56,12 +110,38 @@
         </activity>
 
         <activity
-            android:name=".PharmacyTabs"
+            android:name=".Login"
             android:parentActivityName=".MainActivity">
             <!-- meta-data for support library compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+
+
+        <activity
+            android:name=".HomePageBack"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".BuyerDetails"
+            android:parentActivityName=".MainActivity">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".Receipt"
+            android:parentActivityName=".BuyerDetails">
+            <!-- meta-data for support library compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BuyerDetails" />
         </activity>
 
 <!--     yee yao-->
@@ -89,6 +169,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".LogOut"></activity>
+        <activity android:name=".MapActivity"></activity>
 
 <!--        hao yi-->
         <activity android:name=".RiskSurvey"></activity>

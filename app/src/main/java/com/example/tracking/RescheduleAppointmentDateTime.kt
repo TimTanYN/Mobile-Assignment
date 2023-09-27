@@ -1,13 +1,18 @@
 package com.example.tracking
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.example.tracking.BaseNavigationActivity
+import com.example.tracking.MyAppointmentActivity
+import com.example.tracking.R
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -20,7 +25,7 @@ class RescheduleAppointmentDateTime : BaseNavigationActivity() {
         setContentView(R.layout.activity_reschedule)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Reschedule Appointment Date And Time"
+        supportActionBar?.title = "Reschedule Appointment"
         initToolbarAndNavigation()
 
 
@@ -224,67 +229,74 @@ class RescheduleAppointmentDateTime : BaseNavigationActivity() {
                                     // 用户选择了之前的日期，显示错误消息
                                     showToast("Cannot select a past date.")
                                     // 重置日期为默认值
-                                    selectedDateView.date = todayDate.timeInMillis
+                                    selectedDateView.date = defaultDateInMillis
+                                }
+                            }
+
+                            //當選了日期和時間后，按next要check時間
+                            val buttonConfirm = findViewById<Button>(R.id.buttonConfirm)
+                            buttonConfirm.setOnClickListener {
+                                val selectedDateTime = Calendar.getInstance()
+                                selectedDateTime.timeInMillis = selectedDateView.date // 用户选择的日期
+
+                                // 设置用户选择的时间
+                                val selectedTimeArray = selectedTime.split(":")
+                                if (selectedTimeArray.size == 2) {
+                                    val selectedHour = selectedTimeArray[0].toInt()
+                                    val selectedMinute = selectedTimeArray[1].toInt()
+                                    selectedDateTime.set(Calendar.HOUR_OF_DAY, selectedHour)
+                                    selectedDateTime.set(Calendar.MINUTE, selectedMinute)
+                                    selectedDateTime.set(Calendar.SECOND, 0)
                                 }
 
-                                //當選了日期和時間后，按next要check時間
-                                val buttonConfirm = findViewById<Button>(R.id.buttonConfirm)
-                                buttonConfirm.setOnClickListener {
-                                    val selectedDateTime = Calendar.getInstance()
-                                    selectedDateTime.timeInMillis = selectedDateView.date // 用户选择的日期
-
-                                    // 设置用户选择的时间
-                                    val selectedTimeArray = selectedTime.split(":")
-                                    if (selectedTimeArray.size == 2) {
-                                        val selectedHour = selectedTimeArray[0].toInt()
-                                        val selectedMinute = selectedTimeArray[1].toInt()
-                                        selectedDateTime.set(Calendar.HOUR_OF_DAY, selectedHour)
-                                        selectedDateTime.set(Calendar.MINUTE, selectedMinute)
-                                        selectedDateTime.set(Calendar.SECOND, 0)
-                                    }
-
-                                    val currentDate = Calendar.getInstance()
-                                    if (selectedDateTime.after(currentDate) || selectedDate.after(currentDate)) {
+                                val currentDate = Calendar.getInstance()
+                                var updatedData = mapOf("" to "")
+                                if (selectedDateTime.after(currentDate) || selectedDate.after(currentDate)) {
+                                    if(formattedDate == ""){
+                                        updatedData = mapOf(
+                                            "appointmentTime" to selectedTime
+                                        )
+                                    }else {
                                         // 创建一个包含要更新的字段和新值的映射
-                                        val updatedData = mapOf(
+                                        updatedData = mapOf(
                                             "appointmentDate" to formattedDate,
                                             "appointmentTime" to selectedTime
                                         )
-
-                                        // 获取Firebase Firestore实例
-                                        val db = FirebaseFirestore.getInstance()
-
-                                        // 指定要更新的文档ID，并更新指定的字段
-                                        db.collection("appointment")
-                                            .document(appointmentDocId)
-                                            .update(updatedData) // 使用update()方法来更新指定的字段
-                                            .addOnSuccessListener {
-                                                // 更新成功的处理
-                                                Toast.makeText(
-                                                    this,
-                                                    "Appointment date and time updated in Firebase",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
-                                            }
-                                            .addOnFailureListener { e ->
-                                                // 更新失败的处理
-                                                Toast.makeText(
-                                                    this,
-                                                    "Error updating appointment date and time: $e",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
-                                            }
-
-                                        //跳回去my appointment
-                                        val intent = Intent(
-                                            this@RescheduleAppointmentDateTime,
-                                            MyAppointmentActivity::class.java
-                                        )
-                                        startActivity(intent)
-                                    } else {
-                                        // 用户选择的日期或时间无效，显示错误消息
-                                        showToast("Invalid Date and Time.")
                                     }
+
+                                    // 获取Firebase Firestore实例
+                                    val db = FirebaseFirestore.getInstance()
+
+                                    // 指定要更新的文档ID，并更新指定的字段
+                                    db.collection("appointment")
+                                        .document(appointmentDocId)
+                                        .update(updatedData) // 使用update()方法来更新指定的字段
+                                        .addOnSuccessListener {
+                                            // 更新成功的处理
+                                            Toast.makeText(
+                                                this,
+                                                "Appointment date and time updated in Firebase",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            // 更新失败的处理
+                                            Toast.makeText(
+                                                this,
+                                                "Error updating appointment date and time: $e",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+
+                                    //跳回去my appointment
+                                    val intent = Intent(
+                                        this@RescheduleAppointmentDateTime,
+                                        MyAppointmentActivity::class.java
+                                    )
+                                    startActivity(intent)
+                                } else {
+                                    // 用户选择的日期或时间无效，显示错误消息
+                                    showToast("Invalid Date and Time.")
                                 }
                             }
                         }

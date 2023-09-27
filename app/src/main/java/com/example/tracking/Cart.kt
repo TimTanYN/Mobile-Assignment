@@ -1,5 +1,7 @@
 package com.example.tracking
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -11,14 +13,12 @@ import com.example.tracking.adapter.CartAdapter
 import com.example.tracking.model.ListViewMedicineDetails
 
 class Cart: BaseNavigationActivity() {
-
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cart)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Tracking"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        sharedPreferences = getSharedPreferences("Cart", MODE_PRIVATE)
+
         cart()
        onResume()
         val recyclerView = findViewById<RecyclerView>(R.id.cartRecyclerView)
@@ -28,8 +28,13 @@ class Cart: BaseNavigationActivity() {
             val cartItems = (recyclerView.adapter as CartAdapter).getCartItems()
             if (cartItems.isNotEmpty()) {
                 val totalPrice = MedicineDetails.CartManager.getTotalPrice()
-
+                val editor = sharedPreferences.edit()
+                editor.putLong("totalPrice", totalPrice.toLong())
+                editor.apply()
+                val intent = Intent(this, BuyerDetails::class.java)
+                startActivity(intent)
                 Toast.makeText(this, "Total Price: $${String.format("%.2f", totalPrice)}", Toast.LENGTH_SHORT).show()
+                clearCart()
             } else {
                 Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show()
             }
@@ -60,6 +65,13 @@ class Cart: BaseNavigationActivity() {
         super.onResume()
         recyclerView.adapter?.notifyDataSetChanged()
         cart()
+    }
+
+    fun clearCart() {
+        val cartItems = MedicineDetails.CartManager.cartItems
+        cartItems.clear()
+        val recyclerView = findViewById<RecyclerView>(R.id.cartRecyclerView)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }

@@ -45,7 +45,7 @@ class DiseaseActivity : BaseNavigationActivity(){
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Disease"
-        initToolbarAndNavigation()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val intent = intent
         val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
         val longitude = intent.getDoubleExtra("longitude", 0.0) // default value 0.0

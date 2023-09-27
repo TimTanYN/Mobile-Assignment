@@ -30,7 +30,7 @@ class MedicineDetails : BaseNavigationActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Medicine"
-        initToolbarAndNavigation()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         pharmacy = intent.getStringExtra("selected").toString()
         listview = findViewById(R.id.medicine)
         list()

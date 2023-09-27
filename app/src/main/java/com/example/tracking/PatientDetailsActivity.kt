@@ -5,29 +5,34 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import com.example.tracking.BaseNavigationActivity
+import com.example.tracking.databinding.ActivityPatientDetailsBinding  // 请确保导入正确的数据绑定类
 
 class PatientDetailsActivity : BaseNavigationActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_details)
+
+        // 使用数据绑定来设置布局
+        val binding: ActivityPatientDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_patient_details)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        println("hi")
         supportActionBar?.title = "Patient Details"
         initToolbarAndNavigation()
 
-        val genderSpinner = findViewById<Spinner>(R.id.genderSpinner)
-        val editTextName = findViewById<EditText>(R.id.editTextName)
-        val editTextAge = findViewById<EditText>(R.id.editTextAge)
-        val editTextCondition = findViewById<EditText>(R.id.editTextCondition)
-        val buttonNext = findViewById<Button>(R.id.buttonNext)
+
+        // 不再需要使用 findViewById 来查找视图元素，可以直接通过绑定对象来访问它们
+        val editTextName = binding.editTextName
+        val editTextAge = binding.editTextAge
+        val editTextCondition = binding.editTextCondition
+        val genderSpinner = binding.genderSpinner
+        val buttonNext = binding.buttonNext
 
         // 初始化SharedPreferences
         sharedPreferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE)

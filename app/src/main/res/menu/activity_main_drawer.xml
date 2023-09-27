@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/tracking"
             android:icon="@drawable/ic_menu_home"
-            android:title="Home" />
+            android:title="Tracking" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/login"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Login" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/signup"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Register" />
     </group>
 
     <item android:title=" Yee Yao">
@@ -45,7 +45,12 @@
             <item
                 android:id="@+id/Appointment"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Dontknow" />
+                android:title="Appoinment" />
+
+            <item
+                android:id="@+id/myAppointment"
+                android:icon="@drawable/ic_menu_send"
+                android:title="My Appointment" />
         </menu>
     </item>
 

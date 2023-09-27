@@ -6,6 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.tracking.CreateFragment
 import com.example.tracking.DeleteFragment
 import com.example.tracking.PharmacyCreateFragment
+import com.example.tracking.PharmacyDeleteFragment
+import com.example.tracking.PharmacyUpdateFragment
 import com.example.tracking.PharmacyViewFragment
 import com.example.tracking.UpdateFragment
 import com.example.tracking.ViewFragment
@@ -18,8 +20,8 @@ class PharmacyTabsAdapter (fragmentActivity: FragmentActivity) : FragmentStateAd
         return when (position) {
             0 -> PharmacyViewFragment()
             1 -> PharmacyCreateFragment()
-            2 -> UpdateFragment()
-            3 -> DeleteFragment()
+            2 -> PharmacyUpdateFragment()
+            3 -> PharmacyDeleteFragment()
             else -> throw IllegalArgumentException("Invalid position $position")
         }
     }

@@ -1,6 +1,6 @@
 package com.example.tracking
 
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,17 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Spinner
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
 import java.util.UUID
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,10 +24,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PharmacyCreateFragment.newInstance] factory method to
+ * Use the [PharmacyUpdateFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PharmacyCreateFragment : Fragment() {
+class PharmacyUpdateFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -51,8 +46,9 @@ class PharmacyCreateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pharmacy_create, container, false)
+        return inflater.inflate(R.layout.fragment_pharmacy_update, container, false)
     }
+
     private var selectedImageUri: Uri? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +58,7 @@ class PharmacyCreateFragment : Fragment() {
         pickImageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICK)
+            startActivityForResult(intent, PharmacyUpdateFragment.REQUEST_CODE_IMAGE_PICK)
         }
 
         val uploadImageButton: Button = view.findViewById(R.id.uploadImageButton)
@@ -81,27 +77,24 @@ class PharmacyCreateFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PharmacyCreateFragment.
+         * @return A new instance of fragment PharmacyUpdateFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PharmacyCreateFragment().apply {
+            PharmacyUpdateFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
-
         const val REQUEST_CODE_IMAGE_PICK = 1001
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val view = view ?: return  // Ensure the fragment's view is not null
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_IMAGE_PICK && resultCode == RESULT_OK && data != null) {
+        if (requestCode == PharmacyCreateFragment.REQUEST_CODE_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             selectedImageUri = data.data
             val selectedImageView: ImageView = view.findViewById(R.id.selectedImageView)
             selectedImageView.setImageURI(selectedImageUri)
@@ -132,12 +125,12 @@ class PharmacyCreateFragment : Fragment() {
 
 
                     // Use the set() or update() method to save the downloadUri to the specified document
-                    val data = hashMapOf(
+                    val data : MutableMap<String, Any> = hashMapOf(
                         "URL" to downloadUri.toString(),
                         "pharmacyDesc" to desc,
                         "pharmacyName" to name
                     )
-                    documentReference.set(data)
+                    documentReference.update(data)
                         .addOnSuccessListener {
                             Log.d("Firestore", "Document successfully written!")
                         }
@@ -151,6 +144,4 @@ class PharmacyCreateFragment : Fragment() {
                 Log.e("Upload", "Error uploading image", exception)
             }
     }
-
-
 }

@@ -41,33 +41,55 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
         val drawer_layout: DrawerLayout = findViewById(R.id.drawer)
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
+            R.id.tracking -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 // Handle the home action
             }
-            R.id.nav_gallery -> {
-                val intent = Intent(this, DiseaseTabs::class.java)
+
+            R.id.login -> {
+                val intent = Intent(this, Login::class.java)
                 startActivity(intent)
             }
-            R.id.nav_slideshow -> {
-                val intent = Intent(this, PharmacyTabs::class.java)
+
+            R.id.signup -> {
+                val intent = Intent(this, SignUp::class.java)
                 startActivity(intent)
             }
+
             R.id.food_pyramid -> {
                 val intent = Intent(this, FoodPyramidTab::class.java)
                 startActivity(intent)
             }
+
             R.id.diet -> {
                 val intent = Intent(this, DietPlanTab::class.java)
                 startActivity(intent)
             }
+
             R.id.Survey -> {
                 val intent = Intent(this, RiskSurvey::class.java)
                 startActivity(intent)
             }
+
             R.id.Appointment -> {
-                val intent = Intent(this, Appointment_Main::class.java)
+                val intent = Intent(this, DoctorListActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            R.id.myAppointment -> {
+                val intent = Intent(this, MyAppointmentActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.pharmacy -> {
+                val intent = Intent(this, PharmacyTabs::class.java)
+                startActivity(intent)
+            }
+
+            R.id.disease -> {
+                val intent = Intent(this, DiseaseTabs::class.java)
                 startActivity(intent)
             }
         }
@@ -82,7 +104,7 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    navigateToActivity(MapActivity::class.java)
+                    navigateToActivity(HomePage::class.java)
                     true
                 }
                 R.id.Search -> {
@@ -90,11 +112,11 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
                     true
                 }
                 R.id.person -> {
-                    navigateToActivity(Cart::class.java)
+                    navigateToActivity(RiskSurvey::class.java)
                     true
                 }
                 R.id.cart -> {
-                    navigateToActivity(Cart::class.java)
+                    navigateToActivity(DoctorListActivity::class.java)
                     true
                 }
                 // ... add more cases for other menu items
@@ -105,7 +127,7 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
         // FloatingActionButton setup
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            navigateToActivity(Cart::class.java)
+            navigateToActivity(LogOut::class.java)
         }
     }
 

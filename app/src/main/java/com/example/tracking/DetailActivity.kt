@@ -28,7 +28,7 @@ class DetailActivity : BaseNavigationActivity(){
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Details"
-        initToolbarAndNavigation()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         selected = intent.getStringExtra("selected").toString()
         fetchDataFromFirestore()
         val text = findViewById<TextView>(R.id.diseases)

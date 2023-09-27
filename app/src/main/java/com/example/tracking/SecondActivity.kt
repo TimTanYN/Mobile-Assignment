@@ -24,31 +24,7 @@ class SecondActivity : BaseNavigationActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        initToolbarAndNavigation()
 
-//        db = FirebaseFirestore.getInstance()
-//        val user = hashMapOf(
-//            "first" to "John",
-//            "last" to "Doe",
-//            "age" to 30
-//        )
 
-//        val userId = "John"  // Replace with actual user ID
-//        db.collection("users").document("hOaJ5VxC99abaOCSiZDZ")
-//            .get()
-//            .addOnSuccessListener { document ->
-//                if (document != null) {
-//                    val firstName = document.getString("first")
-//                    val lastName = document.getString("last")
-//                    val age = document.getLong("age")?.toInt()
-//
-//                    val userData = "First Name: $firstName, Last Name: $lastName, Age: $age"
-//                    findViewById<TextView>(R.id.test).text = userData
-//                } else {
-//                    Log.d("Firestore", "No such document")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d("Firestore", "get failed with ", exception)
-//            }
 
         data class User(val amount: Int)
 
