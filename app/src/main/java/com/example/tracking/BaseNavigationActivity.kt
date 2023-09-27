@@ -92,6 +92,16 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
                 val intent = Intent(this, DiseaseTabs::class.java)
                 startActivity(intent)
             }
+
+            R.id.graph -> {
+                val intent = Intent(this, GraphValueUpdate::class.java)
+                startActivity(intent)
+            }
+
+            R.id.home -> {
+                val intent = Intent(this, HomePage::class.java)
+                startActivity(intent)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

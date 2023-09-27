@@ -37,6 +37,7 @@ class MedicineActivity : BaseNavigationActivity(){
         updateListView()
         val searchEditText: EditText = findViewById(R.id.search_input)
         listView = findViewById(R.id.list_view)
+        Create()
 
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}

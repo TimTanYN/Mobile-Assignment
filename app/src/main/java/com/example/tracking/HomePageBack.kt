@@ -25,7 +25,7 @@ class HomePageBack :BaseNavigationActivity(){
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Backend"
         initToolbarAndNavigation()
-
+        Create()
 
         suggestionTextView = findViewById(R.id.suggestionTextView)
         val refreshButton: Button = findViewById(R.id.refreshButton)

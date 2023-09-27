@@ -26,7 +26,7 @@
             android:layout_marginTop="200dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_eae044d8e5394b7bf5ba7132936e0d07b3e1541" />
+            app:srcCompat="@drawable/medicinebox" />
 
         <ImageButton
             android:id="@+id/medicine"
@@ -36,7 +36,7 @@
             android:layout_marginTop="400dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/wallhaven_9dxv78_1920x1080"
+            app:srcCompat="@drawable/map_icon"
             />
 
         <include

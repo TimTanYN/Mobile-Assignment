@@ -1,5 +1,6 @@
 package com.example.tracking
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -17,8 +18,13 @@ class SignUp : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         val register = findViewById<Button>(R.id.register)
+        val login = findViewById<Button>(R.id.signin)
         register.setOnClickListener(){
             signup()
+        }
+        login.setOnClickListener(){
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
         }
 
     }

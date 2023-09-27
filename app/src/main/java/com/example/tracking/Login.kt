@@ -35,8 +35,7 @@ class Login :AppCompatActivity(){
 
         val email = findViewById<EditText>(R.id.email).text.toString()
         val password = findViewById<EditText>(R.id.password).text.toString()
-        if (!isValidEmail(email)) {
-            if (!isValidPassword(password)) {
+
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
@@ -76,12 +75,7 @@ class Login :AppCompatActivity(){
                             Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                         }
                     }
-            }else{
-                Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
-            }
-        }else{
-            Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
-        }
+
 
 
 

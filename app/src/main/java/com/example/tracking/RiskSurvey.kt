@@ -81,12 +81,12 @@ class RiskSurvey: AppCompatActivity() {
             // Reference to the new survey document
             val newSurveyRef = db.collection("survey").document("Survey$newCounter")
 
-            // Set the survey data to the new document
-            transaction.set(newSurveyRef, data)
+                // Set the survey data to the new document
+                transaction.set(newSurveyRef, data)
 
-            // Update the counter document with the new value
-            transaction.update(counterRef, "Survey", newCounter)
-        }
+                // Update the counter document with the new value
+                transaction.update(counterRef, "Survey", newCounter)
+            }
             .addOnSuccessListener {
                 Log.d(TAG, "Transaction success!")
             }
