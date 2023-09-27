@@ -1,5 +1,6 @@
 package com.example.tracking
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,7 @@ class Login :AppCompatActivity(){
 
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+
     fun login(){
 
 
@@ -52,7 +54,7 @@ class Login :AppCompatActivity(){
                                                 val intent = Intent(this, HomePageBack::class.java)
                                                 startActivity(intent)
                                             }else{
-                                                val intent = Intent(this, MainActivity::class.java)
+                                                val intent = Intent(this, HomePage::class.java)
                                                 startActivity(intent)
                                             }
                                         } else {

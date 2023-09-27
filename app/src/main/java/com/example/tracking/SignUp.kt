@@ -38,8 +38,8 @@ class SignUp : AppCompatActivity(){
         val displayName = findViewById<EditText>(R.id.name).text.toString()
         val db = FirebaseFirestore.getInstance()
 
-        if (!isValidEmail(email)) {
-            if (!isValidPassword(password)) {
+        if (isValidEmail(email)) {
+            if (isValidPassword(password)) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
