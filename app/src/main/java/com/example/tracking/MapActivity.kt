@@ -64,7 +64,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
             }
 
             startActivity(intent)
-            Toast.makeText(this, "Button clicked!", Toast.LENGTH_SHORT).show()
+
         }
     }
 

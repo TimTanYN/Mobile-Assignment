@@ -7,17 +7,20 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import com.example.tracking.databinding.BuyerDetailsBinding
 
 class BuyerDetails :BaseNavigationActivity(){
     private lateinit var sharedPreferences: SharedPreferences
-
+    private lateinit var binding: BuyerDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.buyer_details)
+        binding = DataBindingUtil.setContentView(this, R.layout.buyer_details)
+//        setContentView(R.layout.buyer_details)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Details"
@@ -33,9 +36,9 @@ class BuyerDetails :BaseNavigationActivity(){
     }
 
     fun getDetails(){
-        val name = findViewById<EditText>(R.id.name).text.toString().trim()
-        val email = findViewById<EditText>(R.id.email).text.toString().trim()
-        val address = findViewById<EditText>(R.id.address).text.toString().trim()
+        val name = binding.name.text.toString().trim()
+        val email = binding.email.text.toString().trim()
+        val address = binding.address.text.toString().trim()
 
         val nameEditText = findViewById<EditText>(R.id.name)
         val emailEditText = findViewById<EditText>(R.id.email)

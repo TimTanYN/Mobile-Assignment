@@ -5,8 +5,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Adapter
+import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.widget.Toolbar
 import com.example.tracking.model.ListViewDoctorList
@@ -27,6 +30,18 @@ class DoctorListActivity : BaseNavigationActivity() {
         initToolbarAndNavigation()
 
         list()
+        val listView: ListView = findViewById(R.id.DiseaselistView)
+
+        val searchEditText: EditText = findViewById(R.id.search_input)
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                (listView.adapter as com.example.tracking.adapter.ListViewDoctorList).filter.filter(s.toString())
+            }
+        })
     }
 
     fun list() {
