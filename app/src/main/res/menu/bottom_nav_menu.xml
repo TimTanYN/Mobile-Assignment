@@ -9,7 +9,7 @@
     <item
         android:id="@+id/Search"
         android:icon="@drawable/cart"
-        android:title="Search"/>
+        android:title="Cart"/>
 
     <item
         android:id="@+id/placeholder"
@@ -19,11 +19,11 @@
     <item
         android:id="@+id/person"
         android:icon="@drawable/survey"
-        android:title="Profile"/>
+        android:title="Survey"/>
     <item
         android:id="@+id/cart"
         android:icon="@drawable/appointment_icon"
-        android:title="Settings"/>
+        android:title="Appointment"/>
 
 
 
