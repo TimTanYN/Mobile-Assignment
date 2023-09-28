@@ -16,6 +16,16 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Graph" />
 
+        <item
+            android:id="@+id/viewSurvey"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="View Survey" />
+
+        <item
+            android:id="@+id/updateSurvey"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Update Survey" />
+
     </group>
 
 

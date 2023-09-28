@@ -181,10 +181,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".CustomizeDiet"></activity>
 
 
 <!--        hao yi-->
         <activity android:name=".RiskSurvey"></activity>
+        <activity android:name=".SurveyUpdate"></activity>
+        <activity android:name=".SurveyList"></activity>
+        <activity android:name=".RiskSurveyStart"></activity>
+        <activity android:name=".GpsActivity"></activity>
 
 <!--        mei li-->
 

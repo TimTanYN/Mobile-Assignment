@@ -35,8 +35,16 @@
                 android:id="@+id/Survey"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Survey" />
+            <item
+                android:id="@+id/Gps"
+                android:icon="@drawable/ic_menu_share"
+                android:title="GPS" />
 
         </menu>
+
+
+
+
     </item>
 
     <item android:title="Mei Li">

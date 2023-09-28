@@ -1,5 +1,6 @@
 package com.example.tracking
 
+import CalorieViewModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tracking.adapter.FoodPyramidAdapter
 import com.example.tracking.adapter.FoodSelectionAdapter
@@ -35,7 +37,7 @@ class FoodSelectionTab:AppCompatActivity() {
 
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
-
+        val calorieViewModel = ViewModelProvider(this).get(CalorieViewModel::class.java)
         viewPager.adapter = FoodSelectionAdapter(this)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

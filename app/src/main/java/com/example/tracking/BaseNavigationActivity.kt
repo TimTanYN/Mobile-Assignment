@@ -68,7 +68,7 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
             }
 
             R.id.Survey -> {
-                val intent = Intent(this, RiskSurvey::class.java)
+                val intent = Intent(this, RiskSurveyStart::class.java)
                 startActivity(intent)
             }
 
@@ -100,6 +100,18 @@ abstract class BaseNavigationActivity: AppCompatActivity(), NavigationView.OnNav
 
             R.id.home -> {
                 val intent = Intent(this, HomePage::class.java)
+                startActivity(intent)
+            }
+            R.id.Gps -> {
+                val intent = Intent(this, GpsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.viewSurvey -> {
+                val intent = Intent(this, SurveyList::class.java)
+                startActivity(intent)
+            }
+            R.id.updateSurvey -> {
+                val intent = Intent(this, SurveyUpdate::class.java)
                 startActivity(intent)
             }
         }

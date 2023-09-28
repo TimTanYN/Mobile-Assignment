@@ -1,14 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NormalPlanFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-16dp" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="414dp"
+        android:layout_height="402dp"
+        android:src="@drawable/normal_diet_plan"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="345dp"
+        android:layout_height="170dp"
+        android:contentDescription="Hello"
+        app:layout_constraintBottom_toTopOf="@+id/customizeButton"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.255">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="-71dp"
+                tools:layout_editor_absoluteY="443dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="8dp">
+
+                    <!-- Card content here -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="Image Description"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sardine_tomato" />
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:padding="8dp"
+                        android:text="Sardine tomato pasta with gremolata"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="40dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="Enjoy our crowd-pleasing pasta with sardines and gremolata. With added nutrients thanks to the sardines, it's a healthy dish that's low on calories and fat"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="65dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="160dp"
+                        android:layout_marginTop="100dp"
+                        android:text="view"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="8dp">
+
+                    <!-- Card content here -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="Image Description"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/spice_chicken" />
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:padding="8dp"
+                        android:text="Spiced chicken, spinach and sweet potato stew"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="40dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="A healthy one-pot with warming spices that's low fat, low calorie, 3 of your 5-a-day and also full of fibre!"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="65dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="160dp"
+                        android:layout_marginTop="100dp"
+                        android:text="view"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="8dp">
+
+                    <!-- Card content here -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="Image Description"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sesame_salmon" />
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:padding="8dp"
+                        android:text="Sesame salmon, purple sprouting broccoli and sweet potato mash"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="40dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="Try this Asian-inspired salmon supper with a nutty sesame dressing, crisp veg and comforting sweet potato mash. It's healthy, low-calorie and rich in omega-3"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="65dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="160dp"
+                        android:layout_marginTop="100dp"
+                        android:text="view"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="8dp">
+
+                    <!-- Card content here -->
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="Image Description"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chicken_mushroom" />
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:padding="8dp"
+                        android:text="Chicken and mushrooms"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="40dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="A healthy and low calorie chicken and mushroom casserole with bacon, peas and a parsley sauce - use chicken thighs for extra flavour and juiciness"
+                        android:textSize="8sp" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="65dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="160dp"
+                        android:layout_marginTop="100dp"
+                        android:text="view"
+                        android:textSize="8sp" />
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/customizeButton"
+        android:layout_width="394dp"
+        android:layout_height="47dp"
+        android:text="Customize"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.943" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
