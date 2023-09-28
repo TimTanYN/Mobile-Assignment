@@ -137,7 +137,7 @@ class AppointmentReviewSummary : BaseNavigationActivity() {
                 uploadAppointmentToFirebase()
 
                 // 启动主活动或执行其他操作
-                val intent = Intent(this@AppointmentReviewSummary, MainActivity::class.java)
+                val intent = Intent(this@AppointmentReviewSummary, HomePage::class.java)
                 startActivity(intent)
             }
 

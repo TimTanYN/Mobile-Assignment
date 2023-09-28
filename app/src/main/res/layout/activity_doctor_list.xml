@@ -15,9 +15,6 @@
         android:orientation="vertical">
 
         <!--    menu tool bar-->
-        <!--    menu tool bar-->
-
-
         <include
             android:id="@+id/include"
             layout="@layout/app_bar_main"
@@ -25,49 +22,32 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/search_input"
-            android:layout_width="377dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/rounded_search"
-            android:drawableStart="@drawable/search"
-            android:drawablePadding="12dp"
-            android:hint="Search here"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintVertical_bias="0.0" />
+        <!--    menu tool bar-->
 
         <FrameLayout
             android:id="@+id/frameLayout"
-            android:layout_width="372dp"
-            android:layout_height="564dp"
-            android:layout_marginTop="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <!--            android:background="@drawable/frame">-->
 
             <ListView
-                android:id="@+id/DiseaselistView"
+                android:id="@+id/doctorListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:padding="16dp"
                 android:textSize="18sp" />
-
 
         </FrameLayout>
         <!-- 下一页按钮，位于屏幕下方的中间 -->

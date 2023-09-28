@@ -51,7 +51,7 @@
             <!--            android:background="@drawable/frame">-->
 
             <ListView
-                android:id="@+id/DiseaselistView"
+                android:id="@+id/doctorListView"
                 android:layout_width="371dp"
                 android:layout_height="270dp"
                 android:background="?android:attr/selectableItemBackground"

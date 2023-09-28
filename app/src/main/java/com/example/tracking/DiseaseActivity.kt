@@ -6,11 +6,9 @@ import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
 import com.example.tracking.adapter.ListViewAdapter
 import com.example.tracking.model.ListViewModel
 import com.github.mikephil.charting.charts.LineChart
@@ -37,6 +35,7 @@ import java.util.TreeMap
 class DiseaseActivity : BaseNavigationActivity(){
     var receivedLatLng = LatLng(0.0,0.0)
     var city = ""
+    var citys = ""
     private lateinit var db :DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +49,17 @@ class DiseaseActivity : BaseNavigationActivity(){
         val latitude = intent.getDoubleExtra("latitude", 0.0) // default value 0.0
         val longitude = intent.getDoubleExtra("longitude", 0.0) // default value 0.0
         city = intent.getStringExtra("city").toString()
+        citys = city
         receivedLatLng = LatLng(latitude, longitude)
         chart()
         list()
-        fetchAddress(receivedLatLng)
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lists()
     }
 
     fun chart() {
@@ -140,6 +145,8 @@ class DiseaseActivity : BaseNavigationActivity(){
         })
     }
 
+
+
     fun list(){
         val db = FirebaseFirestore.getInstance()
         val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
@@ -147,7 +154,7 @@ class DiseaseActivity : BaseNavigationActivity(){
             .document(city)
             .collection(currentDate)
             .document("disease")
-        val listView: ListView = findViewById(R.id.DiseaselistView)
+        val listView: ListView = findViewById(R.id.doctorListView)
 
 
         docRef
@@ -179,25 +186,46 @@ class DiseaseActivity : BaseNavigationActivity(){
         }
         }
 
-    private fun fetchAddress(latLng: LatLng) {
-        val geocoder = Geocoder(this)
-        try {
-            val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            if (addresses != null) {
-                if (addresses.isNotEmpty()) {
-                    val address = addresses?.get(0)
-                    // You can get more details from 'address' as per your requirement
-                    if (address != null) {
-                        Toast.makeText(this, address.getAddressLine(0), Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "Address not found!", Toast.LENGTH_SHORT).show()
+    fun lists(){
+        val db = FirebaseFirestore.getInstance()
+        val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+        val docRef = db.collection("disease")
+            .document(citys)
+            .collection(currentDate)
+            .document("disease")
+        val listView: ListView = findViewById(R.id.doctorListView)
+
+
+        docRef
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot != null && documentSnapshot.exists()) {
+                    // Extracting field names from the document
+                    val fieldNames = documentSnapshot.data?.keys?.map {
+                        ListViewModel.ListItem(it, R.drawable.btn_icon)
+                    } ?: listOf()
+
+                    // Set the fetched data to your ListView using your custom adapter
+
+                    val adapter = ListViewAdapter(this, fieldNames)
+                    listView.adapter = adapter
                 }
             }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Error fetching address. Please try again.", Toast.LENGTH_SHORT).show()
+
+
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+
+            val selectedItem = listView.adapter.getItem(position) as ListViewModel.ListItem
+            Toast.makeText(this, "Selected: ${selectedItem.text}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("selected",selectedItem.text)
+            intent.putExtra("city", city)
+            startActivity(intent)
         }
     }
+
+
 
     fun getLastSixDates(): List<String> {
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())

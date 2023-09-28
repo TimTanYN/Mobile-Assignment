@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Adapter
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.widget.Toolbar
@@ -30,18 +29,6 @@ class DoctorListActivity : BaseNavigationActivity() {
         initToolbarAndNavigation()
 
         list()
-        val listView: ListView = findViewById(R.id.DiseaselistView)
-
-        val searchEditText: EditText = findViewById(R.id.search_input)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                (listView.adapter as com.example.tracking.adapter.ListViewDoctorList).filter.filter(s.toString())
-            }
-        })
     }
 
     fun list() {
@@ -54,7 +41,7 @@ class DoctorListActivity : BaseNavigationActivity() {
                 ListViewDoctorList.ListItem(doctorName, doctorBio, imageUrl)  // Corrected the sequence
             }
             val adapter = com.example.tracking.adapter.ListViewDoctorList(this, items)
-            val listView: ListView = findViewById(R.id.DiseaselistView)
+            val listView: ListView = findViewById(R.id.doctorListView)
             listView.adapter = adapter
             listView.setOnItemClickListener { parent, view, position, id ->
                 val selectedItem = items[position]

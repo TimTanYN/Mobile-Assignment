@@ -99,7 +99,7 @@ class AppointmentDetails : BaseNavigationActivity() {
             val selectedDateTime = Calendar.getInstance()
             val selectedDateArray = appointmentDate.split("/")
             selectedDateTime.set(Calendar.YEAR, selectedDateArray[0].toInt())
-            selectedDateTime.set(Calendar.MONTH, selectedDateArray[1].toInt() - 1)
+            selectedDateTime.set(Calendar.MONTH, selectedDateArray[1].toInt() - 1) //month is count from 0. 0 = 1(january)
             selectedDateTime.set(Calendar.DAY_OF_MONTH, selectedDateArray[2].toInt())
 
             // 设置用户选择的时间
@@ -113,18 +113,20 @@ class AppointmentDetails : BaseNavigationActivity() {
             }//check date
             if (selectedDateTime.before(todayDate)) {
                 //check time
-                selectedDateTime.add(Calendar.MINUTE, 43)
+                selectedDateTime.add(Calendar.MINUTE, 15)
                 if (selectedDateTime.after(todayDate)) {
 
-                }else{
-                    appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+                } else {
+                    appointmentButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
                 }
-            }
-            else {
-                appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+            } else {
+                appointmentButton.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
             }
         } else {
-            appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+            appointmentButton.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
         }
         //End - 更改按钮的背景颜色
 
@@ -160,20 +162,12 @@ class AppointmentDetails : BaseNavigationActivity() {
                             "Call" -> {
                                 // 自动拨打电话给医生（模拟操作）
                                 val phoneNumber = "0123456789"
-                                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+                                val intent =
+                                    Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
                                 startActivity(intent)
                             }
 
                             "Video Call" -> {
-//                                // 启动发送短信应用（模拟操作）
-//                                val phoneNumber = "0123456789"
-//                                val smsText = "Hi Doctor"
-//
-//                                val smsUri = Uri.parse("smsto:$phoneNumber")
-//                                val intent = Intent(Intent.ACTION_SENDTO, smsUri)
-//                                intent.putExtra("sms_body", smsText)
-//                                startActivity(intent)
-                                // 启动 Google Meet 应用（如果已安装），或者打开 Google Meet 网页链接
                                 val googleMeetUrl = "https://meet.google.com/spi-fjso-meg"
 
                                 // 创建 Intent 打开 Google Meet 链接
@@ -193,21 +187,25 @@ class AppointmentDetails : BaseNavigationActivity() {
                             }
                         }
 
-                    }else{
-                        appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+                    } else {
+                        appointmentButton.backgroundTintList =
+                            ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
                         showToast("You have missed your appointment time.")
                     }
                 } else {
-                    appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+                    appointmentButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
                     showToast("Please Wait Until Your Appointment Date and Time")
                 }
             } else {
-                appointmentButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
+                appointmentButton.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor("#FFA59A9A"))
                 showToast("Error")
             }
         }
         // End - 執行操作
     }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

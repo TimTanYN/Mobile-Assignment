@@ -45,7 +45,7 @@ class DetailActivity : BaseNavigationActivity(){
             .addOnSuccessListener { documents ->
                 val items = documents.mapNotNull { document ->
                     val text = document.getString("tips")
-                    val content = document.getString("Tips 1")
+                    val content = document.getString("Tips1")
                     val imageResId = R.drawable.aklogo_1
                     if (text != null) {
                         RecyclerViewModel.ItemData(imageResId, text, content.toString())

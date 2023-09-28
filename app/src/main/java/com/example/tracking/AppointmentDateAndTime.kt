@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class AppointmentDateAndTime  : BaseNavigationActivity() {
+class AppointmentDateAndTime : BaseNavigationActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -188,8 +188,6 @@ class AppointmentDateAndTime  : BaseNavigationActivity() {
                 Log.d("MyApp", "no2") // 记录 "no" 消息
             }
         }
-
-
     }
 
     private fun showToast(message: String) {

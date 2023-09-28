@@ -113,7 +113,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
                                 if (amount != null) {
                                     Toast.makeText(this, "Cases in $city: $amount", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    Toast.makeText(this, "No data for $city", Toast.LENGTH_SHORT).show()
+//                                    Toast.makeText(this, "No data for $city", Toast.LENGTH_SHORT).show()
                                 }
                             } else {
                                 Log.d("Firestore", "No such document")
