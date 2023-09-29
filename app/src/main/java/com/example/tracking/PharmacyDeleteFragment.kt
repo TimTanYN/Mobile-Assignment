@@ -76,7 +76,7 @@ class PharmacyDeleteFragment : Fragment() {
     fun delete(){
         val db = FirebaseFirestore.getInstance()
         val view = view ?: return  // Ensure the fragment's view is not null
-        val id = view.findViewById<EditText>(R.id.date).text.toString()
+        val id = view.findViewById<EditText>(R.id.pharmcyID).text.toString()
         val documentReference = db.collection("/medicine").document(id)
         documentReference.delete()
             .addOnSuccessListener {

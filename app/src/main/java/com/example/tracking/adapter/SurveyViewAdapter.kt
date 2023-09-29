@@ -50,7 +50,7 @@ class SurveyViewAdapter(context: Context, data: List<ListViewSurvey.SurveyListIt
         }
 
         btnSurveyDel.setOnClickListener{
-            val documentId = "Survey${position + 1}"
+            val documentId = "Survey${position + 1000}"
             deleteSurvey(position, documentId)
         }
 

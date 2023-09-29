@@ -72,7 +72,7 @@ class MedicineDetails : BaseNavigationActivity() {
                     if (document != null && document.exists()) {
                         // Extracting field names from the document
                         val fetchedProducts = document.data?.keys?.map {
-                            ListViewMedicineDetails.ListItems(R.drawable.big, it, 10.0)
+                            ListViewMedicineDetails.ListItems(R.drawable.medicine_icon, it, 10.0)
                         } ?: listOf()
 
                         // Add fetched products to the products list
